@@ -1,35 +1,38 @@
-# Bmp2ssd1306
+# BMP2SSD1306
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bmp2ssd1306`. To experiment with that code, run `bin/console` for an interactive prompt.
+BMP2SSD1306 is an image converter for SSD1306 OLED. It converts the BMP image into the file that has the memory layout of the SSD1306.
 
-TODO: Delete this and the text above, and describe your gem
+## Requirements
+
+Ruby 2.4 or higher.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install it yourself as:
 
-```ruby
-gem 'bmp2ssd1306'
 ```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install bmp2ssd1306
+$ gem install bmp2ssd1306
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Please specify the BMP file to convert from the command line.
 
-## Development
+```
+$ bmp2ssd1306 t-rex1.bmp t-rex2.bmp
+$ ls *.img
+t-rex1.img t-rex2.img
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+## Options
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```
+Usage: bmp2ssd1306 [options] <image>...
+    -v, --verbose                    Show the files being worked on
+    -o, --output DIR                 Write images converted to DIR
+    -s, --suffix SUFFIX              Change the suffix from .img to SUFFIX
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bmp2ssd1306.
+Bug reports and pull requests are welcome on GitHub at https://github.com/takai/bmp2ssd1306.
