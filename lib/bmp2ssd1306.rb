@@ -10,16 +10,16 @@ module BMP2SSD1306
     cols = image.columns
     rows = image.rows
 
-    (0...cols).each do |col|
-      0.step(rows - 1, 8) do |row|
-        bytes = []
-        0.step(8) do |curr|
-          pixel = image.pixel_color(col, row + curr)
-          bitmap = pixel.red > 0 && pixel.green > 0 && pixel.blue > 0 ? 0 : 1
+    (0...rows).step(8) do |row|
+      (0...cols).each do |col|
+        byte = []
+        (0...8).each do |cur|
+          pixel = image.pixel_color(col, row + cur)
+          bit = pixel.red > 0 && pixel.green > 0 && pixel.blue > 0 ? 0 : 1
 
-          bytes << bitmap
+          byte << bit
         end
-        buff << bytes.pack('C*')
+        buff << [byte.join].pack('b*')
       end
     end
 
