@@ -20,6 +20,11 @@ end
 opt.banner += ' <image>...'
 opt.parse!(ARGV)
 
+if ARGV.length == 0
+  puts(opt.help)
+  exit
+end
+
 ARGV.each do |path|
   basename = File.basename(path, '.bmp')
   target = File.join(options[:output], "#{basename}#{options[:suffix]}")
