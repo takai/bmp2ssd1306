@@ -5,7 +5,7 @@ require 'bmp2ssd1306'
 
 Version = BMP2SSD1306::VERSION
 
-options = { output: '.', verbose: false }
+options = { output: '.', verbose: false, suffix: '.img' }
 
 opt = OptionParser.new
 opt.on('-v', '--verbose', 'Show the files being worked on') do |v|
@@ -14,12 +14,15 @@ end
 opt.on('-o DIR', '--output', 'Write images converted to DIR') do |v|
   options[:output] = v
 end
+opt.on('-s SUFFIX', '--suffix', 'Change the suffix from .img to SUFFIX') do |v|
+  options[:suffix] = v
+end
 opt.banner += ' <image>...'
 opt.parse!(ARGV)
 
 ARGV.each do |path|
   basename = File.basename(path, '.bmp')
-  target = File.join(options[:output], "#{basename}.img")
+  target = File.join(options[:output], "#{basename}#{options[:suffix]}")
 
   File.open(target, 'w') do |file|
     file.write(BMP2SSD1306.convert(path))
