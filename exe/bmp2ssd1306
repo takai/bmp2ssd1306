@@ -5,22 +5,27 @@ require 'bmp2ssd1306'
 
 Version = BMP2SSD1306::VERSION
 
+options = { output: '.', verbose: false }
+
 opt = OptionParser.new
 opt.on('-v', '--verbose', 'Show the files being worked on') do |v|
-  @verbose = true
+  options[:verbose] = v
+end
+opt.on('-o DIR', '--output', 'Write images converted to DIR') do |v|
+  options[:output] = v
 end
 opt.banner += ' <image>...'
 opt.parse!(ARGV)
 
 ARGV.each do |path|
   basename = File.basename(path, '.bmp')
-  target = "#{basename}.img"
+  target = File.join(options[:output], "#{basename}.img")
 
   File.open(target, 'w') do |file|
     file.write(BMP2SSD1306.convert(path))
   end
 
-  if @verbose
+  if options[:verbose]
     puts("Converted: #{File.expand_path(path)} -> #{File.expand_path(target)}")
   end
 end
