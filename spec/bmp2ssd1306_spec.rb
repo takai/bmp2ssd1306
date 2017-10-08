@@ -1,11 +1,12 @@
 require "spec_helper"
 
-RSpec.describe Bmp2ssd1306 do
-  it "has a version number" do
-    expect(Bmp2ssd1306::VERSION).not_to be nil
-  end
+RSpec.describe BMP2SSD1306 do
+  describe '.convert' do
+    subject { BMP2SSD1306.convert(source) }
 
-  it "does something useful" do
-    expect(false).to eq(true)
+    let(:source) { File.join(__dir__, '/data/source.bmp') }
+    let(:expected) { IO.read(File.join(__dir__, '/data/expected.img'), encoding: 'ASCII-8BIT') }
+
+    it { expect(subject).to eq(expected) }
   end
 end

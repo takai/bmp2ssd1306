@@ -1,3 +1,5 @@
+require 'pry'
+
 require "bundler/setup"
 require "bmp2ssd1306"
 
