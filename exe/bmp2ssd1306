@@ -9,6 +9,7 @@ opt = OptionParser.new
 opt.on('-v', '--verbose', 'Show the files being worked on') do |v|
   @verbose = true
 end
+opt.banner += ' <image>...'
 opt.parse!(ARGV)
 
 ARGV.each do |path|
