@@ -1,8 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
 require 'bmp2ssd1306'
+
+Version = BMP2SSD1306::VERSION
+
+opt = OptionParser.new
+opt.on('-v', '--verbose', 'Show the files being worked on') do |v|
+  @verbose = true
+end
+opt.parse!(ARGV)
 
 ARGV.each do |path|
   basename = File.basename(path, '.bmp')
-  File.open("#{basename}.img", 'w') do |file|
+  target = "#{basename}.img"
+
+  File.open(target, 'w') do |file|
     file.write(BMP2SSD1306.convert(path))
+  end
+
+  if @verbose
+    puts("Converted: #{File.expand_path(path)} -> #{File.expand_path(target)}")
   end
 end
